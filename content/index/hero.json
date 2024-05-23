@@ -1,0 +1,32 @@
+{
+	"intro": {
+		"start": "const Xolani = ( name, passion ) =>",
+		"end": "Hello, my name is",
+		"speed": 60,
+		"deletionSpeed": 80,
+		"wrapper": "h2",
+		"startDelay": 1000,
+		"deleteDelay": 3000,
+		"restartDelay": 12000
+	},
+
+	"header": {
+		"name": "Xolani Mazibuko.",
+		"usp": "I design and build meaningful experiences."
+	},
+
+	"paragraph": "A digital architect merging code and creativity to build innovative solutions with lasting impact.",
+
+	"buttons": {
+		"primary": {
+			"title": "Contact Me",
+			"url": "mazi76erx@gmail.com",
+			"leaveSite": false
+		},
+		"secondary": {
+			"title": "LinkedIn",
+			"url": "https://www.linkedin.com/in/xolani-mazibuko-baa7a4244",
+			"leaveSite": "true"
+		}
+	}
+}
