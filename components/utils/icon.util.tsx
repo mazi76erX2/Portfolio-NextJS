@@ -1,45 +1,48 @@
-// Core packages
-import { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-// Font Awesome packages
-const { library, config } = require('@fortawesome/fontawesome-svg-core')
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { fas } from '@fortawesome/pro-solid-svg-icons'
-import { fat } from '@fortawesome/pro-thin-svg-icons'
-import { fal } from '@fortawesome/pro-light-svg-icons'
-import { fad } from '@fortawesome/pro-duotone-svg-icons'
-import { far } from '@fortawesome/pro-regular-svg-icons'
-import { fab } from '@fortawesome/free-brands-svg-icons'
+// Type definitions for icon props and font-awesome imports
+type IconType = 'fat' | 'fal' | 'fas' | 'fad' | 'far' | 'fab';
+type IconKey = string; // You'll want to be more specific here based on the actual icon keys
+interface IconProps {
+  icon: [IconType, IconKey]; // Define a tuple for the icon prop
+}
 
-// Load icons into
-library.add(fat, fal, fas, fad, far, fab)
+// Dynamic import for tree shaking (optional)
+async function loadIconLibrary(iconType: IconType) {
+  switch (iconType) {
+    case 'fat': return import('@fortawesome/pro-thin-svg-icons').then(module => module.fat);
+    case 'fal': return import('@fortawesome/pro-light-svg-icons').then(module => module.fal);
+    case 'fas': return import('@fortawesome/pro-solid-svg-icons').then(module => module.fas);
+    case 'fad': return import('@fortawesome/pro-duotone-svg-icons').then(module => module.fad);
+    case 'far': return import('@fortawesome/pro-regular-svg-icons').then(module => module.far);
+    case 'fab': return import('@fortawesome/free-brands-svg-icons').then(module => module.fab);
+    default: throw new Error(`Invalid icon type: ${iconType}`);
+  }
+}
 
-/**
- * Icon factory utility.
- * Generates icon JSX and returns it. Keeps all icon packages isolated in here
- * 
- * ! Can only distribute free icons
- * ? give users access to cheat sheet of free icons
- * ? pre-select those icons in a MD file
- * ? use MD file to only load those icons from the lib
- * 
- * ! requiring the library will likely create a SSR issue
- * ! According to maintainers of @fortawesome the best solution will be to import the icon directly 
- * ! and avoit the library module all together which is inline with MD loading plans
- * * https://github.com/FortAwesome/Font-Awesome/issues/19348
- *
- * @param 	{array} icon request props [ iconType, iconKey ]
- * @returns {jsx} 	<Icon />
- */
-export default function Icon({ icon }) {
+export default function Icon({ icon }: IconProps) {
+  const [iconType, iconKey] = icon;
+  const [isLoading, setIsLoading] = useState(true);
 
-	const [ iconType, iconKey ] = icon
+  useEffect(() => {
+    let isMounted = true;
 
-	const [ stateIconKey, setIconKey ] = useState('circle-notch')
+    loadIconLibrary(iconType).then(library => {
+      if (isMounted) {
+        FontAwesomeIcon.library.add(library);
+        setIsLoading(false);
+      }
+    });
 
-	useEffect( () => setIconKey( iconKey ), [ iconKey ] )
+    return () => {
+      isMounted = false; // Cleanup on unmount
+    };
+  }, [iconType]);
 
-	return (
-		<FontAwesomeIcon icon={[ iconType, stateIconKey ]} />
-	)
+  return isLoading ? (
+    <FontAwesomeIcon icon={['fas', 'circle-notch']} spin />
+  ) : (
+    <FontAwesomeIcon icon={[iconType, iconKey]} />
+  );
 }

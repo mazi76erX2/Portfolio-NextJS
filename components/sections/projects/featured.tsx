@@ -14,8 +14,8 @@ import content 		from '../../../content/projects/featured.json'
 export default function FeaturedProjects() {
 
 	return (
-		<Section classProp={css.hasBg}>	
-			<Container spacing={'verticalXXXXLrg'}>
+		<Section classProp={css.hasBg}>
+			<Container classProp="" spacing={'verticalXXXXLrg'}>
 				<SectionTitle
 					title="Featured Projects"
 					preTitle="UX and Full Stack"
@@ -30,9 +30,9 @@ export default function FeaturedProjects() {
 			</Container>
 			<div className={css.bgContainer}>
 				<span className={css.orbitalBg}>
-					<span class={`${css.bgSection}`}><span className={`${css.bgInner} ${css.heroLeft} ${css.heroOrbital}`}></span></span>
-					<span class={`${css.bgSection}`}><span className={`${css.bgInner} ${css.heroCenter}`}></span></span>
-					<span class={`${css.bgSection}`}><span className={`${css.bgInner} ${css.heroRight} ${css.heroOrbital}`}></span></span>
+					<span className={`${css.bgSection}`}><span className={`${css.bgInner} ${css.heroLeft} ${css.heroOrbital}`}></span></span>
+					<span className={`${css.bgSection}`}><span className={`${css.bgInner} ${css.heroCenter}`}></span></span>
+					<span className={`${css.bgSection}`}><span className={`${css.bgInner} ${css.heroRight} ${css.heroOrbital}`}></span></span>
 				</span>
 				<span className={css.afterGlowBg}></span>
 			</div>

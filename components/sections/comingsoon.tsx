@@ -5,7 +5,7 @@ import css 			from '../../styles/sections/projects/featured.module.scss'
 
 export default function ComingSoon() {
 	return (
-		<Section classProp={css.hasBg}>	
+		<Section classProp={css.hasBg}>
 			<Container>
 				<h2 className="fullHeight centered">Coming Soon!</h2>
 				<style jsx>{`
@@ -23,9 +23,9 @@ export default function ComingSoon() {
 			</Container>
 			<div className={css.bgContainer}>
 				<span className={css.orbitalBg}>
-					<span class={`${css.bgSection}`}><span className={`${css.bgInner} ${css.heroLeft} ${css.heroOrbital}`}></span></span>
-					<span class={`${css.bgSection}`}><span className={`${css.bgInner} ${css.heroCenter}`}></span></span>
-					<span class={`${css.bgSection}`}><span className={`${css.bgInner} ${css.heroRight} ${css.heroOrbital}`}></span></span>
+					<span className={`${css.bgSection}`}><span className={`${css.bgInner} ${css.heroLeft} ${css.heroOrbital}`}></span></span>
+					<span className={`${css.bgSection}`}><span className={`${css.bgInner} ${css.heroCenter}`}></span></span>
+					<span className={`${css.bgSection}`}><span className={`${css.bgInner} ${css.heroRight} ${css.heroOrbital}`}></span></span>
 				</span>
 				<span className={css.afterGlowBg}></span>
 			</div>

@@ -13,11 +13,11 @@ interface BadgesBlockProps {
   title: string;
   copy?: string; // Make copy optional
   list: BadgeObjects[];
-  fullContainer?: boolean; // Make fullContainer optional
+  fullContainer?: string; // Make fullContainer optional
   block?: string;
   icon?: string; // Make icon optional
-  invertedColor?: boolean; // Make invertedColor optional
-  headerIcon?: boolean; // Make headerIcon optional
+  invertedColor?: string; // Make invertedColor optional
+  headerIcon?: string; // Make headerIcon optional
   containerClass?: string; // Make containerClass optional
 }
 

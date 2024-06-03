@@ -98,7 +98,7 @@ const Career: React.FC = () => {
 					<article className={career.companyPositions}>
 						<div className={career.position}>
 							<div className={career.positionContent}>
-								<span class={career.positionHeader}>
+								<span className={career.positionHeader} >
 									<h3>Director of Product Design and Development</h3>
 									<h4>Nov 2021 - Present · 1 yrs 3 mos</h4>
 								</span>
@@ -111,7 +111,7 @@ const Career: React.FC = () => {
 
 						<div className={career.position}>
 							<div className={career.positionContent}>
-								<span class={career.positionHeader}>
+								<span className={career.positionHeader}>
 									<h3>Full Stack Developer & User Experience Designer</h3>
 									<h4>Feb 2020 - Nov 2021 · 1 yrs 10 mos</h4>
 								</span>
@@ -140,7 +140,7 @@ const Career: React.FC = () => {
 
 						<div className={career.position}>
 							<div className={career.positionContent}>
-									<span class={career.positionHeader}>
+									<span className={career.positionHeader}>
 										<h3>Front End Developer & User Interface Designer</h3>
 										<h4>Apr 2019 - Feb 2020 · 11 mos</h4>
 									</span>
@@ -163,7 +163,7 @@ const Career: React.FC = () => {
 										<span className={career.subList}><span className={career.bullet}></span>7.1% overall conversion rate </span>
 									</li>
 								</ul>
-								<Badges list={stack} block="stack" fullContainer="fullContainer"/>
+								<Badges list={stack} color="" block="stack" fullContainer="fullContainer"/>
 							</div>
 							<div className={career.positionAlt}></div>
 						</div>
@@ -203,3 +203,4 @@ const Career: React.FC = () => {
 	)
 }
 
+export default Career;

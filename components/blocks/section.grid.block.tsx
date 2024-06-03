@@ -25,4 +25,4 @@ function generateGrid(gridSize: number, classProp: string): JSX.Element[] {
 	  );
 	}
 	return grid;
-  }
+}

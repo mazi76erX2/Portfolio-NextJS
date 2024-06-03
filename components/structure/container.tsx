@@ -1,26 +1,19 @@
 // Utility packages
-import Spacing from '../utils/spacing.util';
-
-// Structure scss
+import Spacing from '../utils/spacing.util'; // Assuming this returns class names based on an array
 import css from '../../styles/structure/container.module.scss';
 
-/**
- * Structural Component
- * 
- * Section / Container / Componenents / Blocks / Utils
- *          ¯¯¯¯¯¯¯¯¯¯¯
- * @param {string}	classProp template literals of classes for container
- * @param {array} 	spacing array of strings for Spacing utility
- * @param {jsx} 	children children elements
- * @returns {jsx}	<Container />
- */
-export default function Container({ classProp, spacing, children }) {
+// Define types for clarity and type safety
+interface ContainerProps {
+  classProp?: string;
+  spacing?: string[];
+  children: React.ReactNode;
+}
 
-	const _class = classProp ? classProp : '';
-
-	return ( 
-		<div className={`${css.readingWidth} ${_class} ${Spacing(spacing)}`}>
-			{children}
-		</div>
-	);
+// Structural Component: Container
+export default function Container({ classProp = '', spacing = [], children }: ContainerProps) {
+  return (
+    <div className={`${css.readingWidth} ${classProp} ${Spacing(spacing)}`}>
+      {children}
+    </div>
+  );
 }

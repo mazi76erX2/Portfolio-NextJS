@@ -165,3 +165,4 @@ const hoverRight = {
 	}
 }
 
+export default FeaturedProject

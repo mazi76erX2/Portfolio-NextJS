@@ -1,99 +1,98 @@
-import { useEffect } from 'react'
-import { m, useAnimation } from "framer-motion"
-import { useInView } from 'react-intersection-observer'
+import { useEffect } from 'react';
+import { m, useAnimation, Variants } from 'framer-motion';
+import { useInView } from 'react-intersection-observer';
 
-// Utility components
-import Icon from './icon.util.jsx'
-
-/**
-* scss reference for utils should probably be pulled in from the first component under the section
-*/
+import Icon from './icon.util.jsx';
 import badges from '../../styles/blocks/badges.module.scss';
 
-
-export default function Badges({ list, block, color, fullContainer }) {
-
-	const controls = useAnimation();
-	const { ref, inView  } = useInView({
-		"threshold": 0.5,
-		"triggerOnce": false
-	})
-
-	useEffect( () => {
-		if ( inView ) {	controls.start("visible") }
-		if ( !inView ) { controls.start("hidden") }
-	}, [ controls, inView ] );
-
-	const container = {
-		hidden: {
-			opacity: 1,
-			transition: {
-				delayChildren: 0.25,
-				staggerChildren: 0.025
-			}
-		},
-		visible: {
-			opacity: 1,
-			transition: {
-				delayChildren: 0.025,
-				staggerChildren: 0.1
-			}
-		}
-	}
-
-	const item = {
-		hidden: {
-			y: 20,
-			opacity: -0.5
-		},
-		visible: {
-			y: 0,
-			opacity: 1
-		}
-	}
-
-	return (
-		<m.ul
-			className={`${badges.list} ${badges[block]} ${badges[fullContainer]}`}
-			//Animations
-				ref={ref}
-				variants={container}
-				initial="hidden"
-				animate={controls}
-				whileHover="hover"
-		>
-		{
-		list.map( ({ key, name, type }) => {
-			return (
-				<m.li
-					key={name}
-					className={`${badges.item} ${key}`}
-					//Animations
-					variants={item} >
-					<IconModule iconKey={key} iconType={type} color={color}/>
-					<span className={badges.title}>{name}</span>
-				</m.li>
-				)
-			})
-		}
-		</m.ul>
-	)
+// Define interfaces for type safety
+interface Badge {
+  key: string;
+  name: string;
+  type: 'far' | 'fad' | 'fat' | 'fas' | 'devicon';
 }
 
-function IconModule({ iconKey, iconType, color }) {
-	let colored = 'colored'
-	if (color === false) { colored = '' }
-
-	switch (iconType) {
-		case 'far':
-		case 'fad':
-		case 'fat':
-		case 'fas':
-			return ( <Icon icon={[ iconType, iconKey ]} /> )
-		case 'devicon':
-			return ( <i className={`devicon-${iconKey}-plain ${colored}`} /> )
-		default:
-			return ( '' )
-	}
+interface BadgesProps {
+  list: Badge[];
+  block?: string;
+  color?: boolean;
+  fullContainer?: boolean;
 }
 
+// Framer Motion animation variants
+const containerVariants: Variants = {
+  hidden: {
+    opacity: 1,
+    transition: {
+      delayChildren: 0.25,
+      staggerChildren: 0.025
+    }
+  },
+  visible: {
+    opacity: 1,
+    transition: {
+      delayChildren: 0.025,
+      staggerChildren: 0.1
+    }
+  }
+};
+
+const itemVariants: Variants = {
+  hidden: {
+    y: 20,
+    opacity: -0.5
+  },
+  visible: {
+    y: 0,
+    opacity: 1
+  }
+};
+
+interface IconModuleProps {
+	iconKey: string;
+	iconType: 'far' | 'fad' | 'fat' | 'fas' | 'devicon';
+	color: boolean;
+}
+
+export default function Badges({ list, block, color = true, fullContainer = false }: BadgesProps) {
+  const controls = useAnimation();
+  const { ref, inView } = useInView({ threshold: 0.5, triggerOnce: false });
+
+  useEffect(() => {
+    if (inView) controls.start('visible');
+    else controls.start('hidden');
+  }, [controls, inView]);
+
+  return (
+    <m.ul
+      className={`${badges.list} ${block ? badges[block] : ''} ${fullContainer ? badges.fullContainer : ''}`}
+      ref={ref}
+      variants={containerVariants}
+      initial="hidden"
+      animate={controls}
+    >
+      {list.map(({ key, name, type }) => (
+        <m.li key={name} className={`${badges.item} ${key}`} variants={itemVariants}>
+          <IconModule iconKey={key} iconType={type} color={color} />
+          <span className={badges.title}>{name}</span>
+        </m.li>
+      ))}
+    </m.ul>
+  );
+}
+
+function IconModule({ iconKey, iconType, color }: IconModuleProps) {
+  const coloredClass = color ? 'colored' : '';
+
+  switch (iconType) {
+    case 'far':
+    case 'fad':
+    case 'fat':
+    case 'fas':
+      return <Icon icon={[iconType, iconKey]} />;
+    case 'devicon':
+      return <i className={`devicon-${iconKey}-plain ${coloredClass}`} />;
+    default:
+      return null;
+  }
+}
