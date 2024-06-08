@@ -30,7 +30,8 @@ export default function Icon({ icon }: IconProps) {
 
     loadIconLibrary(iconType).then(library => {
       if (isMounted) {
-        FontAwesomeIcon.library.add(library);
+        FontAwesomeIcon.
+        .library.add(library);
         setIsLoading(false);
       }
     });

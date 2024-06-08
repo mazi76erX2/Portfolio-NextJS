@@ -102,7 +102,7 @@ export default function SetTheme() {
 	
 	return (
 		<>
-			<Script id="theme.util.jsx" strategy="beforeInteractive" >
+			<Script id="theme.util.tsx" strategy="beforeInteractive" >
 				{`
 				let themeLocalStorage = localStorage.getItem('theme')
 				let themeSystem       = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'

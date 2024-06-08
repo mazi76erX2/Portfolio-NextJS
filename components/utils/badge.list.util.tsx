@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { m, useAnimation, Variants } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 
-import Icon from './icon.util.jsx';
+import Icon from './icon.util.tsx';
 import badges from '../../styles/blocks/badges.module.scss';
 
 // Define interfaces for type safety
